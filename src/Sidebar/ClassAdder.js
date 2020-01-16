@@ -5,38 +5,40 @@ import SidebarBoxContainer from "../SidebarBoxContainer"
 import DescriptionIcon from "@material-ui/icons/Description"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
-import Markdown from "react-markdown"
+//import Markdown from "react-markdown"
+//const useStyles = makeStyles({
+//})
 
-const useStyles = makeStyles({
-  markdownContainer: {
-    paddingLeft: 16,
-    paddingRight: 16,
-    fontSize: 12,
-    "& h1": { fontSize: 18 },
-    "& h2": { fontSize: 14 },
-    "& h3": { fontSize: 12 },
-    "& h4": { fontSize: 12 },
-    "& h5": { fontSize: 12 },
-    "& h6": { fontSize: 12 },
-    "& p": { fontSize: 12 },
-    "& a": {},
-    "& img": { width: "100%" }
-  }
-})
 
-export default ({ onClassAdd }) => {
-  const classes = useStyles()
+class ClassAdder extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {val: ''}
+    }
 
-  return (
-    <SidebarBoxContainer
-      title="Add new class"
-      icon={<DescriptionIcon style={{ color: grey[700] }} />}
-      expandedByDefault
-    >
-      <input type="text" placeholder="new class name"/>
-      <button onClick={() => onClassAdd('testink')}>
-          Add new
-      </button>
-    </SidebarBoxContainer>
-  )
+    onChange = (e) => {
+        this.setState({val: e.target.value})
+    }
+    render() {
+        return (
+            <SidebarBoxContainer
+                title="Add new class"
+                icon={<DescriptionIcon style={{ color: grey[700] }} />}
+                expandedByDefault
+            >
+                <input type="text"
+                       placeholder="new class name"
+                       onChange={this.onChange}
+                       value={this.state.val}/>
+                <button onClick={() => this.props.onClassAdd(this.state.val) || this.setState({val: ''})}>
+                    Add new
+                </button>
+            </SidebarBoxContainer>
+        )
+
+    }
 }
+//export default ({ onClassAdd }) => {
+//}
+
+export default ClassAdder
