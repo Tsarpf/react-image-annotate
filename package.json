@@ -1,5 +1,6 @@
 {
   "name": "react-image-annotate",
+  "main": "dist/index.js",
   "version": "0.1.34",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.12",
